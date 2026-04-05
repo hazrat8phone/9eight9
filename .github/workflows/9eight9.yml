@@ -14,15 +14,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Deno (For YouTube JS Challenge)
+      - name: Install Deno (To Solve YouTube Challenges)
         run: |
           curl -fsSL https://deno.land/x/install/install.sh | sh
           echo "/home/runner/.deno/bin" >> $GITHUB_PATH
 
-      - name: Install Tools (ffmpeg & latest yt-dlp)
+      - name: Install Tools (ffmpeg & Latest yt-dlp)
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
+          # نصب مستقیم از سورس اصلی برای داشتن آخرین آپدیت‌های ضد‌بات
           python -m pip install -U https://github.com/yt-dlp/yt-dlp/archive/master.tar.gz
 
       - name: Running the Command

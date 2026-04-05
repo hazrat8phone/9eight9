@@ -1,6 +1,5 @@
 name: 9eight9 Video Processor
 
-# این بخش یعنی گیت‌هاب گوش به زنگ دستور دستی (از طرف n8n) باشد
 on:
   workflow_dispatch:
     inputs:
@@ -19,15 +18,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-          python -m pip install --upgrade yt-dlp
+          python -m pip install -U https://github.com/yt-dlp/yt-dlp/archive/master.tar.gz
 
       - name: Running the Command
-        # اینجا دستوری که n8n فرستاده اجرا می‌شود
         run: |
           ${{ github.event.inputs.video_command }}
 
       - name: Send Result to Telegram
         if: success()
         run: |
-          # این خط فایل نهایی را به تلگرام تو می‌فرستد
           curl -v -F "video=@final_video.mp4" https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendVideo?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}

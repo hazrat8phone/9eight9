@@ -14,7 +14,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Tools (ffmpeg & yt-dlp)
+      - name: Install Deno (For YouTube JS Challenge)
+        run: |
+          curl -fsSL https://deno.land/x/install/install.sh | sh
+          echo "/home/runner/.deno/bin" >> $GITHUB_PATH
+
+      - name: Install Tools (ffmpeg & latest yt-dlp)
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
